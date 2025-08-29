@@ -1,0 +1,113 @@
+Below are 30 interview questions based on the Restful Booker API Project Postman collection, explained in a **Hinglish** style to make it simple and relatable. Ye questions API testing, Postman ke use, HTTP methods, authentication, aur collection ke specific test cases ko cover karte hain. Har question ke saath thodi context di hai so you can understand better.
+
+---
+
+### General API Testing Questions
+1. **Restful Booker API ka purpose kya hai, aur iske main endpoints kaunsi hain?**
+   - Ye API bookings manage karne ke liye hai, jaise create, update, delete bookings. Endpoints hain `/auth`, `/booking`, aur `/ping`. Tumhe inke baare mein pata hona chahiye.
+
+2. **GET, POST, PUT, PATCH, aur DELETE HTTP methods mein kya difference hai, aur is collection mein kaise use hote hain?**
+   - GET data fetch karta hai, POST new data create karta hai, PUT full update, PATCH partial update, aur DELETE remove karta hai. Collection mein GET `/booking` se bookings fetch hoti hain, POST `/auth` se token banta hai, etc.
+
+3. **`/auth` endpoint ka kya kaam hai, aur is collection mein iska use kaise dikhta hai?**
+   - `/auth` token banata hai jo PUT aur DELETE requests ke liye chahiye. Collection mein POST request se token create hota hai with username aur password.
+
+4. **Postman mein API response ka status code kaise check karte ho, aur is collection mein kaunse status codes test kiye gaye?**
+   - Postman mein `pm.response.to.have.status(200)` use hota hai. Collection mein mostly 200 aur `/ping` ke liye 201 test kiya gaya.
+
+5. **API requests mein headers ka kya role hai, aur is collection mein kaunse headers common hain?**
+   - Headers request aur response ke metadata dete hain, jaise `Content-Type`, `Accept`, `Authorization`, aur `Cookie`. Ye sab collection mein booking aur auth requests mein dikhte hain.
+
+6. **JSON, XML, aur URL-encoded request bodies mein kya difference hai, aur collection mein kaise use hote hain?**
+   - JSON structured data ke liye, XML similar but tags-based, aur URL-encoded key-value pairs ke liye. Collection mein booking create karne ke liye teeno formats use kiye gaye.
+
+7. **Restful Booker API mein authentication kaise handle hoti hai, aur collection mein kaunse methods dikhte hain?**
+   - Token-based (Cookie) aur Basic Auth use hota hai. DELETE aur PUT requests mein `Cookie: token=abc123` ya `Authorization: Basic` dekha ja sakta hai.
+
+8. **Health check endpoint kya hota hai, aur Restful Booker API mein kaise implement kiya gaya?**
+   - Health check (`/ping`) API ke running status ko check karta hai. Collection mein ye GET request se 201 status code expect karta hai.
+
+9. **Query parameters kya hote hain, aur collection mein bookings filter karne ke liye kaise use hote hain?**
+   - Query parameters URL mein data filter karte hain, jaise `?firstname=sally&lastname=brown` se specific bookings fetch hoti hain.
+
+10. **Postman mein test scripts ka kya kaam hai, aur collection mein kaunse validations hote hain?**
+    - Test scripts response check karte hain, jaise status code, headers, response time, aur body content. Collection mein token, booking details, etc., validate hote hain.
+
+---
+
+### Specific Test Case Questions
+11. **"Auth - CreateToken" request mein kaunse teen test cases hain, aur kaise implement kiye gaye?**
+    - Status code 200, token presence, aur `Content-Type: application/json` check hota hai using `pm.test` aur `pm.expect`.
+
+12. **"Auth - CreateToken AI" request mein extra test cases jaise token type aur length kyun add kiye gaye?**
+    - Ye ensure karta hai ki token valid string hai aur empty nahi. Thorough testing ke liye important hai.
+
+13. **"Auth - CreateToken - Numbers in Username / Password" jaise requests ke test scripts mein kya issue hai?**
+    - Ye 200 status code expect karte hain, lekin invalid credentials ke liye shayad 401 ya 400 aana chahiye. Ye galat hai.
+
+14. **"Create new booking - TC (Super Easy) Gen by AI" request response body ko kaise validate karta hai?**
+    - Ye `bookingid`, `firstname`, `bookingdates`, etc., check karta hai using `pm.expect(response.booking.firstname).to.equal("Jim")` jaise assertions.
+
+15. **"Create new booking - TC (Easy) From the Snippets" aur "Create new booking - TC (Medium) From Learn by JS" ke test scripts mein kya difference hai?**
+    - Easy mein basic tests (status, header, response time) hain, jabki Medium mein detailed checks jaise `firstname`, `bookingid` bhi hote hain.
+
+16. **"Auth - CreateToken - http" request kyun fail ho sakta hai, aur isse kaise fix karoge?**
+    - HTTP secure nahi hota, HTTPS chahiye. URL ko `https://` se replace karo.
+
+17. **Agar "Auth - CreateToken - empty body" request mein empty body bhejo, toh kya hoga, aur 200 status code expect karna kyun galat hai?**
+    - Empty body se shayad 400 ya 401 aana chahiye kyunki required fields missing hain. 200 expect karna unrealistic hai.
+
+18. **"Update current booking - JSON example use" request mein kaunse headers chahiye, aur kyun?**
+    - `Content-Type`, `Accept`, aur `Cookie` (token ke liye) chahiye kyunki ye authenticated request hai.
+
+19. **Booking endpoints mein full update (PUT) aur partial update (PATCH) mein kya difference hai?**
+    - PUT pura data replace karta hai, PATCH sirf specific fields update karta hai. Collection mein dono ka example hai.
+
+20. **"Delete booking - Basic Auth" request kaise authenticate hota hai, aur `YWRtaW46cGFzc3dvcmQxMjM=` kya hai?**
+    - Ye Basic Auth use karta hai, aur value `admin:password123` ka base64 encoded form hai.
+
+---
+
+### Edge Cases aur Negative Testing
+21. **Agar "Get specific -1" request mein negative booking ID bhejo, toh kya hoga, aur 200 status code expect karna kyun galat hai?**
+    - Negative ID invalid hai, shayad 404 aana chahiye. 200 expect karna galat hai kyunki booking exist nahi karegi.
+
+22. **"Auth - CreateToken - Special Characters in Username / Password" jaise requests kyun hain, aur inka status code kya hona chahiye?**
+    - Ye negative testing ke liye hain. Invalid credentials ke liye 401 ya 400 expected hai.
+
+23. **"Auth - CreateToken - Pass Only Username" ya "Pass Only Password" test karne ka purpose kya hai?**
+    - Ye check karta hai ki API missing fields ko kaise handle karta hai. Shayad 400 ya 401 return hoga.
+
+24. **"Auth - CreateToken - Invalid Password" ke test script ko kaise modify karoge taaki 401 status code expect kare?**
+    - `pm.response.to.have.status(200)` ko `pm.response.to.have.status(401)` se replace karo.
+
+25. **XML ya URL-encoded formats se booking create karne mein kya issues aa sakte hain?**
+    - API shayad in formats ko support na kare ya parsing errors ho sakte hain, especially agar XML parsing nahi hota.
+
+---
+
+### Postman-Specific Questions
+26. **cURL command ko Postman request mein kaise convert karte ho, aur is collection mein ye kaise dikha?**
+    - Postman ke Import feature se cURL paste karte hain. Collection mein `description` mein cURL commands diye hain.
+
+27. **Postman mein `pm.expect` function ka kya kaam hai, aur collection mein iska use kaise hota hai?**
+    - Ye assertions ke liye hai, jaise `pm.expect(response.token).to.exist` token presence check karta hai.
+
+28. **Postman mein response details kaise log karte ho, aur collection mein ye kahan dikhta hai?**
+    - `console.log` use hota hai, jaise "Create new booking - TC (Medium) From Learn by JS" mein response aur booking details log hote hain.
+
+29. **`pm.response.json()` aur `pm.response.text()` mein kya difference hai, aur ye kahan use hote hain?**
+    - `json()` parsed JSON deta hai, `text()` raw string. Collection mein dono "Create new booking" tests mein use hote hain.
+
+30. **Is collection ke requests ko folders mein kaise organize karoge?**
+    - Endpoints ke hisaab se (jaise `/auth`, `/booking`) ya operations ke hisaab se (Create, Read, Update, Delete) folders bana sakte ho.
+
+---
+
+### Tips for Interview
+- **Simple Language**: Questions ko Hinglish mein rakha gaya hai taaki beginner-friendly ho.
+- **Practical Tasks**: Interviewer se expect karo ki wo script likhne ya debug karne ko bole.
+- **Real-World Connect**: API testing ke real-world examples se relate karo, jaise invalid inputs ka handling ya complex JSON validation.
+
+Ye questions tumhe API testing aur Postman ke concepts clear karne mein help karenge, aur Restful Booker API ke specific scenarios ko bhi cover karte hain. Good luck!
+
