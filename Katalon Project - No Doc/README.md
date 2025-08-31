@@ -1,3 +1,5 @@
+Project Link : https://ankitkumar-2356106.postman.co/workspace/PYATB5X~6c73ff5a-90de-444d-a0c7-b5326cebbe4c/collection/44694445-a3d0ad0f-8cef-4ff5-96a2-aefd33942351?action=share&source=copy-link&creator=44694445
+
 # 🏥 Katalon Demo Healthcare API Testing Project
 
 This project demonstrates **API testing using Postman** on the [Katalon Demo Healthcare App](https://katalon-demo-cura.herokuapp.com/).  
