@@ -25,3 +25,10 @@ End Result
 🟩 A real-world project with authentication and API chaining
 Real-world confidence to automate a complete login →
 token extraction → data request flow using Postman variables and scripts
+
+Tips / Common Mistakes:
+✅ Make sure environment is selected or variables won’t resolve
+🚫 Don’t hardcode tokens; always extract dynamically
+⚠️ Token may expire in real APIs — handle re-login accordingly
+✏️ Use console.log() to debug scripts easily
+🔒 Never share sensitive tokens publicly
