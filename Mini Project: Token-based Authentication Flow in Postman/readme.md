@@ -32,3 +32,44 @@ Tips / Common Mistakes:
   ⚠️ Token may expire in real APIs — handle re-login accordingly
   ✏️ Use console.log() to debug scripts easily
   🔒 Never share sensitive tokens publicly
+
+Step 1 – Create new Environment
+
+Step 2 – Add a variable: baseUrl → https://reqres.in
+
+Step 3 – Save and select the environment
+
+Step 4 – Create a new POST request:
+{{baseUrl}}/api/login
+
+Step 5 – In Body (raw → JSON):
+
+{
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+}
+
+Step 6 – In Tests tab, add:
+
+const response = pm.response.json();
+pm.environment.set("token", response.token);
+console.log("Token saved:", response.token);
+
+
+Step 7 – Click Send → Response should contain a token
+
+Step 8 – Check Environment Variables → token should be stored
+
+Step 9 – Create a new GET request:
+{{baseUrl}}/api/users?page=2
+
+Step 10 – Go to Headers:
+Authorization → Bearer {{token}}
+
+Step 12 – Go to the Pre-request Script tab in the GET request
+
+pm.environment.set("timestamp", Date.now());
+console.log("Current Timestamp:", pm.environment.get("timestamp"));
+
+
+Step 13 – Run and turn on the Postman Console (View → Show Postman Console) to verify
