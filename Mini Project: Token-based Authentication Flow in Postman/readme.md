@@ -1,4 +1,4 @@
-# Mini Project: Token-based Authentication Flow in Postman
+# Project: Token-based Authentication Flow in Postman
   https://ankitkumar-2356106.postman.co/workspace/PYATB5X~6c73ff5a-90de-444d-a0c7-b5326cebbe4c/folder/44694445-d87b1369-3ea3-42c4-a5c4-4353bdf9cbae?action=share&creator=44694445&ctx=documentation&active-environment=44694445-22065ceb-dd55-4311-8a88-cd8bcd22e1b8
 
 # Scenario Overview:
