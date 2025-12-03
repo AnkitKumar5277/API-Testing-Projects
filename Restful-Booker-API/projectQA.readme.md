@@ -1,7 +1,3 @@
-Below are 30 interview questions based on the Restful Booker API Project Postman collection, explained in a **Hinglish** style to make it simple and relatable. Ye questions API testing, Postman ke use, HTTP methods, authentication, aur collection ke specific test cases ko cover karte hain. Har question ke saath thodi context di hai so you can understand better.
-
----
-
 ### General API Testing Questions
 1. **Restful Booker API ka purpose kya hai, aur iske main endpoints kaunsi hain?**
    - Ye API bookings manage karne ke liye hai, jaise create, update, delete bookings. Endpoints hain `/auth`, `/booking`, aur `/ping`. Tumhe inke baare mein pata hona chahiye.
