@@ -1,9 +1,4 @@
-<img width="841" height="645" alt="image" src="https://github.com/user-attachments/assets/f1c10717-9205-46f4-86ba-c6238e6f71eb" />Mini Project : Automating API Test Flow with Postman Collections & Runner
-Step by Step DEMO
-Will start from scratch
-Can follow along with hands-on
-Let me know if you have any ques
-QUIZ
+Mini Project : Automating API Test Flow with Postman Collections & Runner
 
 Scenario Overview:
 ● You have a simple User Management API
@@ -23,3 +18,18 @@ End Result
 🟩 You can run a complete API workflow in one go
 🟩 You can pass variables dynamically and chain requests
 🟩 Builds a foundation for data-driven and CI/CD testing
+
+Step 1 – Create new Environment
+Step 2 – Add a variable:
+baseUrl → https://reqres.in
+token → (empty)
+userId → (empty)
+Step 3 – Save and select the environment
+Step 4 – Click “New” → Collection → Name it User Flow Automation
+Step 5 – Create a new POST request Login (Extract Token)
+{{baseUrl}}/api/login
+Step 6 – Add body
+{
+  "email": "eve.holt@reqres.in",
+  "password": "cityslicka"
+}
