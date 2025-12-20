@@ -1,42 +1,29 @@
-Mini Project : Automating API Test Flow with Postman Collections & Runner
+Here’s a **clean, interview-ready `README.md` format** you can directly use in your GitHub project for this **Postman API Automation Mini Project**.
 
-Scenario Overview:
-● You have a simple User Management API
-● The test flow involves:
-   a. Login → extract token
-   b. Create a user → use token → extract user ID
-   c. Update user using the extracted ID
-   d. Delete the user
-● You’ll run all these steps as one automated flow using Postman Runner
+---
 
-Deliverables
-✅ Postman Collection with at least 4 requests
-✅ Environment file for base URL and dynamic variables
-✅ Automated run report (via Collection Runner)
+```md
+# 🧪 Mini Project: Automating API Test Flow with Postman
 
-End Result
-🟩 You can run a complete API workflow in one go
-🟩 You can pass variables dynamically and chain requests
-🟩 Builds a foundation for data-driven and CI/CD testing
+## 📌 Project Overview
+This project demonstrates **end-to-end API automation** using **Postman Collections, Environments, and Collection Runner**.  
+A complete **User Management API workflow** is automated with dynamic data handling and request chaining.
 
-ask ai -> For this request create script in post-response section to extract token from response and store it in environment variable `token`
+---
 
-🧪 Mini Project: Automating API Test Flow using Postman
-📌 Scenario
+## 🔁 Automated API Flow
+1. **Login** → Extract authentication token  
+2. **Create User** → Use token → Extract userId  
+3. **Update User** → Use extracted userId  
+4. **Delete User** → Validate deletion  
 
-Automate a User Management API flow using Postman Collection + Environment + Runner
+All requests are executed **in one flow** using Postman Runner.
 
-Flow:
+---
 
-Login → extract token
+## 🗂 Project Structure
+```
 
-Create User → use token → extract userId
-
-Update User → use userId
-
-Delete User
-
-🗂 Project Structure
 Postman
 │
 ├── Collection
@@ -52,166 +39,196 @@ Postman
 │
 └── Collection Runner Report
 
-🌍 Step 1: Create Environment
+```
 
-Environment Name: User_API_Env
+---
 
-Add variables:
+## 🌍 Environment Setup
 
-Variable	Initial Value	Current Value
-baseUrl	https://reqres.in
-	https://reqres.in
+**Environment Name:** `User_API_Env`
 
-token		
-userId		
+| Variable | Initial Value | Current Value |
+|--------|---------------|---------------|
+| baseUrl | https://reqres.in | https://reqres.in |
+| token | | |
+| userId | | |
 
-✅ Save Environment
+---
 
-📦 Step 2: Create Collection
+## 🔐 API Requests Details
 
-Collection Name:
-User Management API Automation
-
-🔐 Request 1: Login (Extract Token)
-
-Request Name: 1_Login
-Method: POST
-URL:
+### 1️⃣ Login – Extract Token
+**Method:** POST  
+**Endpoint:**  
+```
 
 {{baseUrl}}/api/login
 
+````
 
-Body (JSON):
-
+**Request Body:**
+```json
 {
   "email": "eve.holt@reqres.in",
   "password": "cityslicka"
 }
+````
 
-✅ Tests Script
+**Tests Script:**
+
+```javascript
 pm.test("Login successful", function () {
     pm.response.to.have.status(200);
 });
 
 let response = pm.response.json();
 pm.environment.set("token", response.token);
+```
 
+---
 
-✔ Token stored dynamically
+### 2️⃣ Create User – Extract userId
 
-👤 Request 2: Create User (Extract userId)
+**Method:** POST
+**Endpoint:**
 
-Request Name: 2_Create_User
-Method: POST
-URL:
-
+```
 {{baseUrl}}/api/users
+```
 
+**Headers:**
 
-Headers:
-
+```
 Authorization: Bearer {{token}}
 Content-Type: application/json
+```
 
+**Request Body:**
 
-Body (JSON):
-
+```json
 {
   "name": "Ankit",
   "job": "QA Engineer"
 }
+```
 
-✅ Tests Script
-pm.test("User created", function () {
+**Tests Script:**
+
+```javascript
+pm.test("User created successfully", function () {
     pm.response.to.have.status(201);
 });
 
 let response = pm.response.json();
 pm.environment.set("userId", response.id);
+```
 
+---
 
-✔ userId extracted and saved
+### 3️⃣ Update User
 
-✏ Request 3: Update User
+**Method:** PUT
+**Endpoint:**
 
-Request Name: 3_Update_User
-Method: PUT
-URL:
-
+```
 {{baseUrl}}/api/users/{{userId}}
+```
 
+**Request Body:**
 
-Headers:
-
-Authorization: Bearer {{token}}
-Content-Type: application/json
-
-
-Body (JSON):
-
+```json
 {
   "name": "Ankit Kumar",
   "job": "Senior QA Engineer"
 }
+```
 
-✅ Tests Script
-pm.test("User updated", function () {
+**Tests Script:**
+
+```javascript
+pm.test("User updated successfully", function () {
     pm.response.to.have.status(200);
 });
+```
 
-🗑 Request 4: Delete User
+---
 
-Request Name: 4_Delete_User
-Method: DELETE
-URL:
+### 4️⃣ Delete User
 
+**Method:** DELETE
+**Endpoint:**
+
+```
 {{baseUrl}}/api/users/{{userId}}
+```
 
+**Tests Script:**
 
-Headers:
-
-Authorization: Bearer {{token}}
-
-✅ Tests Script
-pm.test("User deleted", function () {
+```javascript
+pm.test("User deleted successfully", function () {
     pm.response.to.have.status(204);
 });
+```
 
-▶ Step 3: Run Using Collection Runner
+---
 
-Click Runner
+## ▶ Running the Collection
 
-Select Collection → User Management API Automation
+1. Open **Postman**
+2. Click **Collection Runner**
+3. Select Collection → `User Management API Automation`
+4. Select Environment → `User_API_Env`
+5. Set Iterations → `1`
+6. Click **Run**
 
-Select Environment → User_API_Env
+---
 
-Iterations → 1
+## 📊 Test Execution Report
 
-Click Run
+* All requests executed successfully ✅
+* Token and userId passed dynamically
+* Full API workflow completed in a single run
 
-📊 Deliverable: Automated Run Report
+Reports can be exported in:
 
-After run:
+* JSON
+* HTML
 
-All requests PASS (🟢)
+---
 
-Token & userId passed automatically
+## 🎯 Key Learnings
 
-Full workflow executed in one go
+✔ API workflow automation
+✔ Environment variable handling
+✔ Dynamic request chaining
+✔ Postman test scripting
+✔ CI/CD ready automation approach
 
-You can export report as:
+---
 
-JSON
+## 🛠 Tools Used
 
-HTML
+* Postman
+* REST APIs
+* JavaScript (Postman Tests)
 
-🎯 End Result (For Interview / Resume)
+---
 
-✔ Automated complete API workflow
-✔ Dynamic variable handling
-✔ Request chaining
-✔ Ready for CI/CD integration
-✔ Real-world API automation exposure
+## 📌 Ideal For
 
+* QA Freshers
+* API Testing Practice
+* Automation Portfolio
+* Interview Demonstrations
 
+```
 
+---
+
+If you want, I can also:
+- 📸 Add **screenshots section**
+- 🧠 Convert this into **resume bullet points**
+- 🚀 Prepare **CI/CD + Newman README**
+
+Just tell me 👍
+```
