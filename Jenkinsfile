@@ -12,7 +12,7 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 bat '''
-                newman run Restful-Booker-API/postman/collection.json ^
+                newman run Restful-Booker-API/postman/postman_collection.json ^
                 -e Restful-Booker-API/postman/environment.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
