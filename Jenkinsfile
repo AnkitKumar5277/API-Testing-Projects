@@ -13,7 +13,6 @@ pipeline {
             steps {
                 bat '''
                 newman run Restful-Booker-API/postman/postman_collection.json ^
-                -e Restful-Booker-API/postman/environment.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
             }
