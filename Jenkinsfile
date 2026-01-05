@@ -8,10 +8,12 @@ pipeline {
                     url: 'https://github.com/AnkitKumar5277/API-Testing-Projects.git'
             }
         }
-        
+
         stage('Run Postman Tests') {
             steps {
                 bat '''
+                if not exist reports mkdir reports
+
                 newman run postman/postman_collection.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
