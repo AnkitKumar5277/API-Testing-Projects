@@ -14,7 +14,7 @@ pipeline {
                 bat '''
                 if not exist reports mkdir reports
 
-                newman run postman/postman_collection.json ^
+                newman run postman_collection.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
             }
