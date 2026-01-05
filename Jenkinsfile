@@ -8,11 +8,11 @@ pipeline {
                     url: 'https://github.com/AnkitKumar5277/API-Testing-Projects.git'
             }
         }
-
+        
         stage('Run Postman Tests') {
             steps {
                 bat '''
-                newman run Restful-Booker-API/postman/postman_collection.json ^
+                newman run postman/postman_collection.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
             }
