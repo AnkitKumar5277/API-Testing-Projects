@@ -4,15 +4,16 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: '<your-repo-url>'
+                git branch: 'main',
+                    url: 'https://github.com/AnkitKumar5277/API-Testing-Projects.git'
             }
         }
 
         stage('Run Postman Tests') {
             steps {
                 bat '''
-                newman run postman/collection.json ^
-                -e postman/environment.json ^
+                newman run Restful-Booker-API/postman/collection.json ^
+                -e Restful-Booker-API/postman/environment.json ^
                 -r html --reporter-html-export reports/report.html
                 '''
             }
@@ -21,7 +22,10 @@ pipeline {
 
     post {
         always {
-            publishHTML([
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
                 reportDir: 'reports',
                 reportFiles: 'report.html',
                 reportName: 'Postman API Test Report'
