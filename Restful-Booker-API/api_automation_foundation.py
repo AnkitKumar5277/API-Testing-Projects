@@ -3,7 +3,6 @@ import allure
 
 base_url = "https://restful-booker.herokuapp.com"
 
-
 # ---------- 1. AUTH ----------
 @allure.title("Create Token")
 def test_auth():
